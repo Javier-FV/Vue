@@ -31,11 +31,7 @@ export default {
   }
   },
   methods: {
-   init: function(){
-      if(this.$route.name != "user"){
-      let username = localStorage.getItem("current_username")
-      this.$router.push({name: "user", params:{ username: username }})
-      }
+  
   
   },
   
