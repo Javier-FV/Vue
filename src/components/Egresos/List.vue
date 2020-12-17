@@ -45,7 +45,7 @@
         created: function(){
             this.username = this.$route.params.username
             let self = this
-            axios.get("http://127.0.0.1:8000/egresos/" + this.username)
+            axios.get("https://sprint2ciclo3.herokuapp.com/egresos/" + this.username)
                 .then((result) => {
                     self.egresos = result.data
                     console.log(self.egresos)

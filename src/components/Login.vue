@@ -43,7 +43,7 @@ export default {
   methods:{
     login: function(){
       var self =this
-      axios.post("http://127.0.0.1:8000/users/user/auth/", self.user_in, {headers: {}})
+      axios.post("https://sprint2ciclo3.herokuapp.com/users/user/auth/", self.user_in, {headers: {}})
       .then((result) => {
                     alert("Autenticación Exitosa");
                     self.$emit('log-in', self.user_in.username)
@@ -53,7 +53,7 @@ export default {
   // created: function(){
   //     // this.username = this.$route.params.username
   //     let self = this
-  //     axios.post("http://127.0.0.1:8000/users/user/data/create/" + this.username)
+  //     axios.post("https://sprint2ciclo3.herokuapp.com/users/user/data/create/" + this.username)
   //         .then((result) => {
           
   //         // self.balance = result.data.balance

@@ -139,7 +139,7 @@ export default {
   methods:{
     register: function(){
       var self =this
-      axios.post("http://127.0.0.1:8000/users/user/data/create/" + self.userregiter.username, self.userregiter)
+      axios.post("https://sprint2ciclo3.herokuapp.com/users/user/data/create/" + self.userregiter.username, self.userregiter)
           .then((result) => {
             alert("Datos guardados");
         
@@ -152,7 +152,7 @@ export default {
   // created: function(){
   //     // this.username = this.$route.params.username
   //     let self = this
-      // axios.post("http://127.0.0.1:8000/users/user/data/create/" + serlf.userregiter.usuario, self.userregiter)
+      // axios.post("https://sprint2ciclo3.herokuapp.com/users/user/data/create/" + serlf.userregiter.usuario, self.userregiter)
       //     .then((result) => {
       //       alert("Datos guardados");
         
