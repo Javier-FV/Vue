@@ -23,6 +23,8 @@
       <!-- <p v-if="error" class="error">Has introducido mal el email o la contraseña.</p> -->
       <!-- <input class="form-submit" type="submit" value="Entrar"> -->
       <button class="form-submit" type="submit"> Entrar </button>
+      <h2 class="form-regis">Si no tiene cuenta. </h2>
+      <button class="form-submit" v-on:click="registroview">  Registrese Aqui </button>
     </form>
   </div>
 </template>
@@ -48,7 +50,12 @@ export default {
                     alert("Autenticación Exitosa");
                     self.$emit('log-in', self.user_in.username)
                 })
-    }
+    },
+    registroview: function(){
+      if(this.$route.name != "register"){
+        let username = localStorage.getItem("current_username")
+        this.$router.push({name: "register", params:{ username: username }})
+      }}
   }
   // created: function(){
   //     // this.username = this.$route.params.username
@@ -100,6 +107,10 @@ export default {
   margin-top: 2rem;
   color: white;
   margin-bottom: 0.5rem;
+}
+.form-regis {
+  text-align: center;
+  color: white;
 }
 .form-input {
   padding: 10px 15px;

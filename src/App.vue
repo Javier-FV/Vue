@@ -33,9 +33,9 @@ export default {
   },
   methods: {
      init: function(){
-      if(this.$route.name != "user"){
+      if(this.$route.name != "login"){
         let username = localStorage.getItem("current_username")
-        this.$router.push({name: "user", params:{ username: username }})
+        this.$router.push({name: "login", params:{ username: username }})
       }
       
     },
