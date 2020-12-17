@@ -43,7 +43,7 @@ export default {
   methods:{
     login: function(){
       var self =this
-      axios.post("/users/user/auth/", self.user_in, {headers: {}})
+      axios.post("http://127.0.0.1:8000/users/user/auth/", self.user_in, {headers: {}})
       .then((result) => {
                     alert("Autenticación Exitosa");
                     self.$emit('log-in', self.user_in.username)
