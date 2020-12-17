@@ -4,7 +4,7 @@
     <form action class="form" @submit.prevent="register">
       <label class="form-label" for="#usuario">Usuario:</label>
       <input
-        v-model="usuario"
+        v-model="userregiter.usuario"
         class="form-input"
         type="usuario"
         id="usuario"
@@ -13,7 +13,7 @@
       >
       <label class="form-label" for="#contrasena">Contraseña:</label>
       <input
-        v-model="contrasena"
+        v-model="userregiter.contrasena"
         class="form-input"
         type="contrasena"
         id="contrasena"
@@ -21,7 +21,7 @@
       >
       <label class="form-label" for="#contrasena-repeat">Repite la contraseña:</label>
       <input
-        v-model="contrasenaRepeat"
+        v-model="userregiter.contrasenaRepeat"
         class="form-input"
         type="contrasena"
         id="contrasena-repeat"
@@ -29,7 +29,7 @@
       >
       <label class="form-label" for="#nombre">Nombre:</label>
       <input
-        v-model="nombre"
+        v-model="userregiter.nombre"
         class="form-input"
         type="nombre"
         id="nombre"
@@ -38,7 +38,7 @@
       >
       <label class="form-label" for="#apellido">Apellido:</label>
       <input
-        v-model="apellido"
+        v-model="userregiter.apellido"
         class="form-input"
         type="apellido"
         id="apellido"
@@ -47,7 +47,7 @@
       >
       <label class="form-label" for="#correo">Correo:</label>
       <input
-        v-model="correo"
+        v-model="userregiter.correo"
         class="form-input"
         type="correo"
         id="correo"
@@ -56,7 +56,7 @@
       >
       <label class="form-label" for="#ciudad">Ciudad:</label>
       <input
-        v-model="ciudad"
+        v-model="userregiter.ciudad"
         class="form-input"
         type="ciudad"
         id="ciudad"
@@ -65,7 +65,7 @@
       >
       <label class="form-label" for="#edad">Edad:</label>
       <input
-        v-model="edad"
+        v-model="userregiter.edad"
         class="form-input"
         type="edad"
         id="edad"
@@ -74,7 +74,7 @@
       >
       <label class="form-label" for="#estrato">Estrato:</label>
       <input
-        v-model="estrato"
+        v-model="userregiter.estrato"
         class="form-input"
         type="estrato"
         id="estrato"
@@ -83,7 +83,7 @@
       >
       <label class="form-label" for="#ocupacion">Ocupacion:</label>
       <input
-        v-model="ocupacion"
+        v-model="userregiter.ocupacion"
         class="form-input"
         type="ocupacion"
         id="ocupacion"
@@ -92,7 +92,7 @@
       >
       <label class="form-label" for="#estado_civil">Estado Civil:</label>
       <input
-        v-model="estado_civil"
+        v-model="userregiter.estado_civil"
         class="form-input"
         type="estado_civil"
         id="estado_civil"
@@ -101,14 +101,15 @@
       >
       <label class="form-label" for="#numero_hijos">Numero Hijos:</label>
       <input
-        v-model="numero_hijos"
+        v-model="userregiter.numero_hijos"
         class="form-input"
         type="numero_hijos"
         id="numero_hijos"
         required
         placeholder="Numero Hijos"
       >
-      <input class="form-submit" type="submit" value="Registrarse">
+      <!-- <input class="form-submit" type="submit" value="Registrarse"> -->
+      <button class="form-submit" type="submit"> Registrarse </button>
     </form>
   </div>
 </template>
@@ -119,31 +120,47 @@ export default {
   name: 'Login',
   data: function (){
       return {
-      usuario: "",
-      contrasena: "",
-      contrasenaRepeat: "",
-      nombre: "",
-      apellido: "",
-      correo: "",
-      ciudad: "",
-      edad: "",
-      estrato: "",
-      ocuapacion: "",
-      estado_civil: "",
-      numero_hijos: ""
+        userregiter:{
+          usuario: "",
+          contrasena: "",
+          // contrasenaRepeat: "",
+          nombre: "",
+          apellido: "",
+          correo: "",
+          ciudad: "",
+          edad: "",
+          estrato: "",
+          ocuapacion: "",
+          estado_civil: "",
+          numero_hijos: ""
+        }
       }
   },
-  created: function(){
-      // this.username = this.$route.params.username
-      let self = this
-      axios.post("http://127.0.0.1:8000/users/user/data/create/" + this.usuario)
+  methods:{
+    register: function(){
+      var self =this
+      axios.post("http://127.0.0.1:8000/users/user/data/create/" + self.userregiter.usuario, self.userregiter)
           .then((result) => {
-        info = JSON.stringify(this.data)
+            alert("Datos guardados");
+        
       })
       .catch((error) => {
           alert("ERROR Servidor");
       });
+    }
   }
+  // created: function(){
+  //     // this.username = this.$route.params.username
+  //     let self = this
+      // axios.post("http://127.0.0.1:8000/users/user/data/create/" + serlf.userregiter.usuario, self.userregiter)
+      //     .then((result) => {
+      //       alert("Datos guardados");
+        
+      // })
+      // .catch((error) => {
+      //     alert("ERROR Servidor");
+      // });
+  // }
 }
 // export default {
 //   data: () => ({
