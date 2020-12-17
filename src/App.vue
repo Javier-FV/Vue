@@ -4,7 +4,8 @@
 <h1>MisFinanzas</h1>
 <nav>
 <button v-on:click="init" v-if="is_auth" > Inicio </button>
-<button v-on:click="getBalance" v-if="is_auth" > Ingresos </button>
+<!-- <button v-on:click="getBalance" v-if="is_auth" > Ingresos </button> -->
+<button v-if="is_auth" > Ingresos </button>
 <button v-if="is_auth" > Egresos </button>
 <button v-if="is_auth" > Resumen </button>
 <button v-if="is_auth" > Estimación </button>
@@ -31,6 +32,19 @@ export default {
   }
   },
   methods: {
+     init: function(){
+      if(this.$route.name != "user"){
+        let username = localStorage.getItem("current_username")
+        this.$router.push({name: "user", params:{ username: username }})
+      }
+      
+    },
+    getBalance: function(){
+      if(this.$route.name != "user_balance"){
+        let username = localStorage.getItem("current_username")
+        this.$router.push({name: "user_balance", params:{ username: username }})
+      }
+    },
   },
   beforeCreate: function(){
   localStorage.setItem('current_username', 'camilo24')

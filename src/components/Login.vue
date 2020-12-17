@@ -4,7 +4,7 @@
     <form action class="form" @submit.prevent="login">
       <label class="form-label" for="#usuario">Usuario:</label>
       <input
-        v-model="usuario"
+        v-model="user_in.usuario"
         class="form-input"
         type="usuario"
         id="usuario"
@@ -13,15 +13,16 @@
       >
       <label class="form-label" for="#contrasena">Contraseña:</label>
       <input
-        v-model="contrasena"
+        v-model="user_in.contrasena"
         class="form-input"
         type="contrasena"
         id="contrasena"
         placeholder="Contraseña"
       >
       
-      <p v-if="error" class="error">Has introducido mal el email o la contraseña.</p>
-      <input class="form-submit" type="submit" value="Entrar">
+      <!-- <p v-if="error" class="error">Has introducido mal el email o la contraseña.</p> -->
+      <!-- <input class="form-submit" type="submit" value="Entrar"> -->
+      <button class="form-submit" type="submit"> Entrar </button>
     </form>
   </div>
 </template>
@@ -32,21 +33,35 @@ export default {
   name: 'Login',
   data: function (){
       return {
-      usuario: "",
-      contrasena: ""
+        user_in:{
+          usuario: "",
+          contrasena: ""
+        }
       }
   },
-  created: function(){
-      // this.username = this.$route.params.username
-      let self = this
-      axios.post("http://127.0.0.1:8000/users/user/data/create/" + this.username)
-          .then((result) => {
-          self.balance = result.data.balance
-      })
-      .catch((error) => {
-          alert("ERROR Servidor");
-      });
+
+  methods:{
+    login: function(){
+      var self =this
+      axios.post("/users/user/auth/", self.user_in, {headers: {}})
+      .then((result) => {
+                    alert("Autenticación Exitosa");
+                    self.$emit('log-in', self.user_in.username)
+                })
+    }
   }
+  // created: function(){
+  //     // this.username = this.$route.params.username
+  //     let self = this
+  //     axios.post("http://127.0.0.1:8000/users/user/data/create/" + this.username)
+  //         .then((result) => {
+          
+  //         // self.balance = result.data.balance
+  //     })
+  //     .catch((error) => {
+  //         alert("ERROR Servidor");
+  //     });
+  // }
   // data: () => ({
   //   email: "",
   //   password: "",
