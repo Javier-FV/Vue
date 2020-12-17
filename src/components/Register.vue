@@ -4,7 +4,7 @@
     <form action class="form" @submit.prevent="register">
       <label class="form-label" for="#usuario">Usuario:</label>
       <input
-        v-model="userregiter.usuario"
+        v-model="userregiter.username"
         class="form-input"
         type="usuario"
         id="usuario"
@@ -13,20 +13,20 @@
       >
       <label class="form-label" for="#contrasena">Contraseña:</label>
       <input
-        v-model="userregiter.contrasena"
+        v-model="userregiter.password"
         class="form-input"
         type="contrasena"
         id="contrasena"
         placeholder="Contraseña"
       >
-      <label class="form-label" for="#contrasena-repeat">Repite la contraseña:</label>
+      <!-- <label class="form-label" for="#contrasena-repeat">Repite la contraseña:</label>
       <input
         v-model="userregiter.contrasenaRepeat"
         class="form-input"
         type="contrasena"
         id="contrasena-repeat"
         placeholder="Contraseña"
-      >
+      > -->
       <label class="form-label" for="#nombre">Nombre:</label>
       <input
         v-model="userregiter.nombre"
@@ -121,8 +121,8 @@ export default {
   data: function (){
       return {
         userregiter:{
-          usuario: "",
-          contrasena: "",
+          username: "",
+          password: "",
           // contrasenaRepeat: "",
           nombre: "",
           apellido: "",
@@ -139,7 +139,7 @@ export default {
   methods:{
     register: function(){
       var self =this
-      axios.post("http://127.0.0.1:8000/users/user/data/create/" + self.userregiter.usuario, self.userregiter)
+      axios.post("http://127.0.0.1:8000/users/user/data/create/" + self.userregiter.username, self.userregiter)
           .then((result) => {
             alert("Datos guardados");
         
