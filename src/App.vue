@@ -1,24 +1,24 @@
 <template>
-<div id="app">
-<div class="header">
-<h1>MisFinanzas</h1>
-<nav>
-<button v-on:click="init" v-if="is_auth" > Inicio </button>
-<!-- <button v-on:click="getBalance" v-if="is_auth" > Ingresos </button> -->
-<button v-if="is_auth" > Ingresos </button>
-<button v-if="is_auth" > Egresos </button>
-<button v-if="is_auth" > Resumen </button>
-<button v-if="is_auth" > Estimación </button>
-<button v-if="is_auth" >Cerrar Sesión</button>
-</nav>
-</div>
-<div class="main-component">
-  <router-view></router-view>
-</div>
-<div class="footer">
-<h2>Misión TIC 2022</h2>
-</div>
-</div>
+  <div>
+    <div class="header">
+      <h1>MisFinanzas</h1>
+      <nav>
+        <button v-on:click="init" v-if="is_auth" > Inicio </button>
+        <!-- <button v-on:click="getBalance" v-if="is_auth" > Ingresos </button> -->
+        <button v-if="is_auth" > Ingresos </button>
+        <button v-on:click="getEgresos" v-if="is_auth" > Egresos </button>
+        <button v-if="is_auth" > Resumen </button>
+        <button v-if="is_auth" > Estimación </button>
+        <button v-if="is_auth" >Cerrar Sesión</button>
+      </nav>
+    </div>
+    <div class="main-component">
+      <router-view></router-view>
+    </div>
+    <div class="footer">
+      <h2>Misión TIC 2022</h2>
+    </div>
+  </div>
 </template>
 
 
@@ -27,9 +27,9 @@ export default {
   name: 'App',
   components: {},
   data: function(){
-  return {
-  is_auth: localStorage.getItem('isAuth') || false
-  }
+    return {
+      is_auth: localStorage.getItem('isAuth') || false
+    }
   },
   methods: {
      init: function(){
@@ -45,12 +45,19 @@ export default {
         this.$router.push({name: "user_balance", params:{ username: username }})
       }
     },
+    getEgresos: function(){
+      console.log(this.$route.name)
+      if (this.$route.name != "egresos") {
+        let username = localStorage.getItem("current_username")
+        this.$router.push({name: "egresos", params:{ username: username }})
+      }
+    },
   },
   beforeCreate: function(){
-  localStorage.setItem('current_username', 'camilo24')
-  localStorage.setItem('isAuth', true)
+    localStorage.setItem('current_username', 'camilo24')
+    localStorage.setItem('isAuth', true)
   }
-  }
+}
 </script>
 
 <style>
@@ -93,11 +100,24 @@ export default {
     background: #E5E7E9;
     border: 1px solid #E5E7E9;
   }
+  footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 2.5rem;            /* Footer height */
+  }
   .footer h2{
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .main-component {
+    padding-top: 10px;
+    width: 70%;
+    margin-left: 15%;
+    /* height: 25px; */
+    padding-bottom: 2.5rem;
   }
 </style>

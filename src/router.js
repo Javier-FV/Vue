@@ -1,9 +1,10 @@
 import vueRouter from 'vue-router'
+import App from './App'
 import User from './components/User'
 import Login from './components/Login'
 import Register from './components/Register'
 import UserBalance from './components/UserBalance'
-import App from './App'
+import EgresosList  from './components/Egresos/List'
 
 const router = new vueRouter({
     mode: 'history',
@@ -34,6 +35,11 @@ const router = new vueRouter({
         name: "register",
         component: Register
     },
-    ]
+    {
+        path: '/egresos/:username',
+        name: "egresos",
+        component: EgresosList
+    }
+    ],
 })
 export default router
