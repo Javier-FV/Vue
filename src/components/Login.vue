@@ -31,13 +31,13 @@ import axios from 'axios'
 export default {
   name: 'Login',
   
- methodes:{ 
+
   data: function (){
       return {
       usuario: "",
       contrasena: ""
       }
-      }
+      
   },
   created: function(){
       // this.username = this.$route.params.username
