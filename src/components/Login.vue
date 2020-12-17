@@ -4,7 +4,7 @@
     <form action class="form" @submit.prevent="login">
       <label class="form-label" for="#usuario">Usuario:</label>
       <input
-        v-model="user_in.usuario"
+        v-model="user_in.username"
         class="form-input"
         type="usuario"
         id="usuario"
@@ -13,7 +13,7 @@
       >
       <label class="form-label" for="#contrasena">Contraseña:</label>
       <input
-        v-model="user_in.contrasena"
+        v-model="user_in.password"
         class="form-input"
         type="contrasena"
         id="contrasena"
@@ -34,8 +34,8 @@ export default {
   data: function (){
       return {
         user_in:{
-          usuario: "",
-          contrasena: ""
+          username: "",
+          password: ""
         }
       }
   },
