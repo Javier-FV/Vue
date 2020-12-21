@@ -1,8 +1,11 @@
 <template>
 
+
+
 <div class="pregresp">
-<h1 id="logo-headline"  >Cuestionario</h1>
+<h1 id="logo"  >Cuestionario</h1>
     <hr class="divider" />
+
 
 
  <tr>  
@@ -168,6 +171,7 @@
   </div>
    </tr> 
 
+<button class="btn">Enviar</button>
 </div>
  
 </template>
@@ -223,10 +227,29 @@ margin-left: 300px;
 
 }
 
-.logo-headline {
-font-size: 1.8rem; 
+.logo {
+font-size: 25.8rem; 
 
 }
+.btn {
+margin: 80px;
+text-decoration:none;
+font-weight:600;
+font-size:20px;
+color:#ffffff;
+padding-top:10px;
+padding-bottom:10px;
+padding-left:50px;
+padding-right:50px;
+background-color:#005BBB;
+
+}
+.active{
+            background:red;
+       }
+    button.btn:active{
+        background:red;
+    }
 
 
 </style>
