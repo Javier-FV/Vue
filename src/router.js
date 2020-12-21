@@ -5,7 +5,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import UserBalance from './components/UserBalance'
 import EgresosList  from './components/Egresos/List'
-import Ingresos_models from './components/appingresos/index'
+import Ingresos_models from './components/appingresos/index.html'
 
 const router = new vueRouter({
     mode: 'history',
