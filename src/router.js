@@ -13,7 +13,7 @@ const router = new vueRouter({
     {
         path: '/',
         name: "root",
-        component: App
+        component: Login
     },
     {
         path: '/user/:username',
