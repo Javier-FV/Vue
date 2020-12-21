@@ -82,29 +82,23 @@
                 // axios.get("http://localhost:8000/egresos/" + this.username)
                     .then((result) => {
                         self.egresos = result.data
-                        console.log(self.egresos)
                 })
                 .catch((error) => {
-                    console.log(error);
                     alert("ERROR Servidor");
                 });
             },
             borrar: function(id){
-                console.log(id)
                 axios.delete("https://sprint2ciclo3.herokuapp.com/egresos/" + id)
                 // axios.delete("http://localhost:8000/egresos/" + id)
                     .then((result) => {
-                        console.log(result.data)
                         alert("Registro #" + result.data + " borrado satisfactoriamente");
                         this.get_list();
                     }
                 ).catch((error) => {
-                    console.log(error);
                     alert('Se generó un error al eliminar el registro')
                 });
             },
             showActualizar: function(item) {
-                console.log(item)
                 this.egreso = item;
                 this.editMode = true;
                 this.isModalVisible = true;
@@ -113,7 +107,6 @@
                 this.resetEgreso();
                 this.editMode = false;
                 this.isModalVisible = true;
-
             },
             save: function(data) {
                 data.username = this.username;
@@ -122,29 +115,23 @@
                 axios.post("https://sprint2ciclo3.herokuapp.com/egresos", data)
                 // axios.post("http://localhost:8000/egresos", data)
                     .then((result) => {
-                        console.log(result.data)
                         alert("Registro Creado satisfactoriamente");
                         this.get_list();
                         this.resetEgreso();
                     }
                 ).catch((error) => {
-                    console.log(error);
                     alert('Se generó un error al crear el registro')
                 });
             },
             update: function(data){
-                console.log('Update');
-                console.log(data)
                 axios.put("https://sprint2ciclo3.herokuapp.com/egresos/" + data.Idegresos, data)
                 // axios.put("http://localhost:8000/egresos/" + data.Idegresos, data)
                     .then((result) => {
-                        console.log(result.data)
                         alert("Registro actualizado satisfactoriamente");
                         this.get_list();
                         this.resetEgreso();
                     }
                 ).catch((error) => {
-                    console.log(error);
                     alert('Se generó un error al actualizar el registro')
                 });
             },
