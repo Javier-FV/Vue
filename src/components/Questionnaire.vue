@@ -2,7 +2,7 @@
 
 
 
-<div class="pregresp">
+<div class="questionnaire">
 <h1 id="logo"  >Cuestionario</h1>
     <hr class="divider" />
 
@@ -176,16 +176,57 @@
  
 </template>
 
-
-
 <script>
+
+import axios from 'axios'
+export default {
+  name: 'questionnaire',
+  data: function (){
+      return {
+        userregiter:{
+          question1: "",
+          question2: "",
+          question3: "",
+          question4: "",
+          question5: "",
+          question6: "",
+          question7: "",
+          question8: "",
+          question9: "",
+          question10: "",
+          question11: "",
+          question12: "",
+          question13: "",
+          question14: "",
+          question15: ""
+         
+        }
+      }
+  },
+  methods:{
+    questionnaire: function(){
+      var self =this
+      axios.post("https://sprint2ciclo3.herokuapp.com/users/question/crear/" + self.questionnaire.username, self.questionnaire)
+          .then((result) => {
+            alert("Cuestionario guardados");
+        
+      })
+      .catch((error) => {
+          alert("ERROR Servidor");
+      });
+    }
+  }
+  
+
+
+
+}
+
 </script>
-
-
 
 <style>
 
-.pregresp {
+.questionnaire {
 border: 1px solid #7DA5E0;
 padding: 10px;
 margin: 10px;
