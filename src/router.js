@@ -39,6 +39,11 @@ const router = new vueRouter({
         path: '/egresos/:username',
         name: "egresos",
         component: EgresosList
+    },
+    {
+        path: '/ingresos/:username',
+        name: "ingresos",
+        component: IngresosList
     }
     ],
 })
