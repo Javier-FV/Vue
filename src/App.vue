@@ -5,7 +5,7 @@
       <nav>
         <button v-on:click="init" v-if="is_auth" > Inicio </button>
         <!-- <button v-on:click="getBalance" v-if="is_auth" > Ingresos </button> -->
-        <button v-on:click="getIngresos" v-if="is_auth" > Ingresos </button>
+        <button v-on:click="getappingresos" v-if="is_auth" > Ingresos </button>
         <button v-on:click="getEgresos" v-if="is_auth" > Egresos </button>
         <button v-if="is_auth" > Resumen </button>
         <button v-if="is_auth" > Estimación </button>
