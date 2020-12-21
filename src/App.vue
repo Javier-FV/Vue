@@ -52,6 +52,13 @@ export default {
         this.$router.push({name: "egresos", params:{ username: username }})
       }
     },
+      getIngresos: function(){
+      console.log(this.$route.name)
+      if (this.$route.name != "ingresos") {
+        let username = localStorage.getItem("current_username")
+        this.$router.push({name: "ingresos", params:{ username: username }})
+      }
+    },
   },
   beforeCreate: function(){
     localStorage.setItem('current_username', 'camilo24')
