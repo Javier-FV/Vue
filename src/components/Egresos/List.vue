@@ -1,5 +1,8 @@
 <template>
-    <div id="Egresos">
+    <div id="Egresos" class="fullsize">
+        <div class="fullsize">
+            <button @click="showCrer" class="btn right success">Crear</button>
+        </div>
         <table class="centered">
             <thead>
                 <th>Descripción</th>
@@ -19,45 +22,160 @@
                     <td>{{ item.importe }}</td>
                     <td>{{ item.fecha_de_vencimiento }}</td>
                     <td>{{ item.estado }}</td>
-                    <td>{{ item.categoría }}</td>
+                    <td>{{ item.categoria }}</td>
                     <td>{{ item.fecha_lanzamiento }}</td>
                     <td>{{ item.fecha_pago }}</td>
-                    <td style="width:150px;">
-                        <button class="btn primary">Editar</button>
-                        <button class="btn danger">Eliminar</button>
+                    <td style="width:150px; text-align: center; vertical-align: middle;">
+                        <button @click="showActualizar(item)" class="btn primary">Editar</button>
+                        <button v-on:click="borrar(item.Idegresos)" class="btn danger">Eliminar</button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <modal
+            v-show="isModalVisible"
+            @close="closeModal"
+            :editMode="editMode"
+            :egreso="egreso"
+            @save="save($event)"
+            @update="update($event)"
+        />
     </div>
 </template>
 
 <script>
+    import Modal from "./components/Modal";
     import axios from 'axios';
     export default {
         name: "Egresos",
         data:function(){
             return {
                 username: "",
-                egresos: {}
+                egresos: {},
+                egreso: {
+                    descripcion: '',
+                    frecuencia: '',
+                    importe: 0,
+                    fecha_de_vencimiento: new Date().toISOString(),
+                    estado: '',
+                    categoria: '',
+                    fecha_lanzamiento: new Date().toISOString(),
+                    fecha_pago: new Date().toISOString(),
+                    observaciones: ''
+                },
+                isModalVisible: false,
+                editMode: true,
+            }
+        },
+        components: {
+            Modal
+        },
+        methods: {
+            closeModal: function() {
+                this.editMode = false;
+                this.isModalVisible = false;
+            },
+            get_list: function() {
+                this.username = this.$route.params.username
+                let self = this
+                axios.get("https://sprint2ciclo3.herokuapp.com/egresos/" + this.username)
+                // axios.get("http://localhost:8000/egresos/" + this.username)
+                    .then((result) => {
+                        self.egresos = result.data
+                        console.log(self.egresos)
+                })
+                .catch((error) => {
+                    console.log(error);
+                    alert("ERROR Servidor");
+                });
+            },
+            borrar: function(id){
+                console.log(id)
+                axios.delete("https://sprint2ciclo3.herokuapp.com/egresos/" + id)
+                // axios.delete("http://localhost:8000/egresos/" + id)
+                    .then((result) => {
+                        console.log(result.data)
+                        alert("Registro #" + result.data + " borrado satisfactoriamente");
+                        this.get_list();
+                    }
+                ).catch((error) => {
+                    console.log(error);
+                    alert('Se generó un error al eliminar el registro')
+                });
+            },
+            showActualizar: function(item) {
+                console.log(item)
+                this.egreso = item;
+                this.editMode = true;
+                this.isModalVisible = true;
+            },
+            showCrer: function() {
+                this.resetEgreso();
+                this.editMode = false;
+                this.isModalVisible = true;
+
+            },
+            save: function(data) {
+                data.username = this.username;
+                data.Idegresos = 0;
+                
+                axios.post("https://sprint2ciclo3.herokuapp.com/egresos", data)
+                // axios.post("http://localhost:8000/egresos", data)
+                    .then((result) => {
+                        console.log(result.data)
+                        alert("Registro Creado satisfactoriamente");
+                        this.get_list();
+                        this.resetEgreso();
+                    }
+                ).catch((error) => {
+                    console.log(error);
+                    alert('Se generó un error al crear el registro')
+                });
+            },
+            update: function(data){
+                console.log('Update');
+                console.log(data)
+                axios.put("https://sprint2ciclo3.herokuapp.com/egresos/" + data.Idegresos, data)
+                // axios.put("http://localhost:8000/egresos/" + data.Idegresos, data)
+                    .then((result) => {
+                        console.log(result.data)
+                        alert("Registro actualizado satisfactoriamente");
+                        this.get_list();
+                        this.resetEgreso();
+                    }
+                ).catch((error) => {
+                    console.log(error);
+                    alert('Se generó un error al actualizar el registro')
+                });
+            },
+            resetEgreso: function(){
+                this.egreso = {
+                    descripcion: '',
+                    frecuencia: '',
+                    importe: 0,
+                    fecha_de_vencimiento: new Date().toISOString(),
+                    estado: '',
+                    categoria: '',
+                    fecha_lanzamiento: new Date().toISOString(),
+                    fecha_pago: new Date().toISOString(),
+                    observaciones: ''
+                };
+                
+                this.editMode = false;
+                this.isModalVisible = false;
             }
         },
         created: function(){
-            this.username = this.$route.params.username
-            let self = this
-            axios.get("https://sprint2ciclo3.herokuapp.com/egresos/" + this.username)
-                .then((result) => {
-                    self.egresos = result.data
-                    console.log(self.egresos)
-            })
-            .catch((error) => {
-                alert("ERROR Servidor");
-            });
+            this.username = this.$route.params.username;
+            this.get_list();
         }
     }
 </script>
 
 <style>
+    .overflow-hidden {
+        overflow: hidden;
+    }
     table {
         padding-top: 5;
         width: 100%;
@@ -68,17 +186,29 @@
     }
     .danger {
         color: #E5E7E9;
-        background: #df4759;
+        background: #dc3545;
     }
-
     .primary {
         color: #E5E7E9;
-        background: #0275d8;
-        
+        background: #007bff;
+    }
+    .success {
+        color: #e5e7e9;
+        background: #28a745;
     }
     .btn {
         border: 1px solid #df4759;
         border-radius: 5px;
         padding: 10px 10px;
     }
+    .right {
+        position: relative;
+        float: right;
+    }
+    .fullsize{
+        width:850px; /* or whatever width you want. */
+        max-width:850px; /* or whatever width you want. */
+        display: inline-block;
+    }
+    tr:nth-child(even) {background-color: #f2f2f2;}
 </style>
