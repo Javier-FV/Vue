@@ -5,6 +5,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import UserBalance from './components/UserBalance'
 import EgresosList  from './components/Egresos/List'
+import Ingresos_models from './components/Ingresos_models'
 
 const router = new vueRouter({
     mode: 'history',
@@ -43,7 +44,7 @@ const router = new vueRouter({
     {
         path: '/ingresos/:username',
         name: "ingresos",
-        component: IngresosList
+        component: Ingresos_models
     }
     ],
 })
